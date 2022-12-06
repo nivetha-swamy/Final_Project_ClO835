@@ -15,7 +15,7 @@ spec:
         app: mysql
     spec:
       containers:
-      - image: '670435616773.dkr.ecr.us-east-1.amazonaws.com/assignment2-mysql:v2.0'
+      - image: '387584877503.dkr.ecr.us-east-1.amazonaws.com/finalproject-mysql'
         name: mysql
         env:
         - name: MYSQL_ROOT_PASSWORD
