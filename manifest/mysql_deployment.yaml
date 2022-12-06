@@ -1,0 +1,32 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-mysql
+  labels:
+    app: mysql
+spec:
+  replicas: 1 
+  selector:
+    matchLabels:
+      app: mysql
+  template:
+    metadata:
+      labels:
+        app: mysql
+    spec:
+      containers:
+      - image: '670435616773.dkr.ecr.us-east-1.amazonaws.com/assignment2-mysql:v2.0'
+        name: mysql
+        env:
+        - name: MYSQL_ROOT_PASSWORD
+          value: db123
+        ports:
+        - containerPort: 3306
+          protocol: TCP
+        volumeMounts:
+        - name: mysql-database
+          mountPath: /var/lib/mysql
+      volumes:
+      - name: mysql-database
+        persistentVolumeClaim: 
+          claimName: mysql-pvc
