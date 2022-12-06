@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: e-webapp
-        image: 670435616773.dkr.ecr.us-east-1.amazonaws.com/assignment2-webapp:v2.0
+        image: 387584877503.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp
         env:
         - name: DBHOST 
           value: "e-mysql"
