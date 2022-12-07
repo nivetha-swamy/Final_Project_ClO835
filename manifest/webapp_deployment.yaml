@@ -26,7 +26,17 @@ spec:
           value: root
         - name: DBPWD 
           value: db123
-        ports: 
-        - containerPort: 8080
-          protocol: TCP
+       - name: GROUP_NAME
+         valueFrom:
+           configMapKeyRef:
+             name: webapp-config
+             key: GROUP_NAME
+       - name: IMAGE_URL
+         valueFrom:
+           configMapKeyRef:
+             name: webapp-config
+             key: IMAGE_URL
+       ports: 
+       - containerPort: 81
+         protocol: TCP
           
