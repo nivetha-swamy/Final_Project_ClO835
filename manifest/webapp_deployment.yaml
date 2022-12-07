@@ -14,6 +14,7 @@ spec:
       labels:
         app: employees
     spec:
+      ServiceAccountName: clo835
       containers:
       - name: e-webapp
         image: 387584877503.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp
