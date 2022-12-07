@@ -11,5 +11,4 @@ spec:
       targetPort: 81
   selector: 
     app: employees
-    name: e-webapp
-          
+    
