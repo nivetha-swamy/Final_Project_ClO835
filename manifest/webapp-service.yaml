@@ -1,32 +1,15 @@
 apiVersion: apps/v1
-kind: Deployment
+kind: Service
 metadata:
   name: e-webapp
   labels: 
     app: employees
 spec:
-  replicas: 2
-  selector:
-    matchLabels:
-      app: employees
-  template:
-    metadata:
-      labels:
-        app: employees
-    spec:
-      containers:
-      - name: e-webapp
-        image: 670435616773.dkr.ecr.us-east-1.amazonaws.com/assignment2-webapp:v2.0
-        env:
-        - name: DBHOST 
-          value: "e-mysql"
-        - name: DBPORT
-          value: "3306"
-        - name: DBUSER
-          value: root
-        - name: DBPWD 
-          value: db123
-        ports: 
-        - containerPort: 8080
-          protocol: TCP
+  type: LoadBalancer
+  ports: 
+    - port: 80
+      targetPort: 81
+  selector: 
+    app: employees
+    name: e-webapp
           
