@@ -42,7 +42,7 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           cd webapp/
-          docker build -f Dockerfile -t $ECR_REGISTRY/finalproject-webapp:v3.0 .
+          docker build -f Dockerfile -t $ECR_REGISTRY/finalproject-webapp:v2.0 .
           docker push $ECR_REGISTRY/finalproject-webapp:v3.0
           
       - name: MYSQL build, test, tag, and push image to Amazon ECR
@@ -50,5 +50,5 @@ jobs:
           ECR_REGISTRY: ${{ steps.login-ecr.outputs.registry }}
         run: |
           cd webapp/
-          docker build -f Dockerfile_mysql -t $ECR_REGISTRY/finalproject-mysql:v3.0 .
+          docker build -f Dockerfile_mysql -t $ECR_REGISTRY/finalproject-mysql:v2.0 .
           docker push $ECR_REGISTRY/finalproject-mysql:v3.0
