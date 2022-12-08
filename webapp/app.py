@@ -15,6 +15,7 @@ DBPORT = int(os.environ.get("DBPORT"))
 GROUP_NAME = os.environ.get('GROUP_NAME')
 IMAGE_URL = os.environ.get('IMAGE_URL')
 IMAGE_S3 = os.environ.get('IMAGE_S3')
+image1 = os.environ.get('image1')
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -49,11 +50,11 @@ table = 'employee';
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', GROUP_NAME=GROUP_NAME, IMAGE_URL=IMAGE_URL)
+    return render_template('addemp.html', GROUP_NAME=GROUP_NAME, image1=image1)
 
 @app.route("/about", methods=['GET','POST' ])
 def about():
-    return render_template('about.html', GROUP_NAME=GROUP_NAME, IMAGE_URL=IMAGE_URL)
+    return render_template('about.html', GROUP_NAME=GROUP_NAME, image1=image1)
 
     
 @app.route("/addemp", methods=['POST'])
@@ -82,7 +83,7 @@ def AddEmp():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    return render_template("getemp.html", GROUP_NAME=GROUP_NAME, IMAGE_URL=IMAGE_URL)
+    return render_template("getemp.html", GROUP_NAME=GROUP_NAME, image1=image1)
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
@@ -111,7 +112,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"],GROUP_NAME=GROUP_NAME, IMAGE_URL=IMAGE_URL)
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"],GROUP_NAME=GROUP_NAME, image1=image1)
 
 if __name__ == '__main__':
     
