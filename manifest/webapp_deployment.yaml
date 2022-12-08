@@ -19,24 +19,31 @@ spec:
       - name: e-webapp
         image: 387584877503.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp
         env:
-        - name: DBHOST 
-          value: "e-mysql"
-        - name: DBPORT
-          value: "3306"
-        - name: DBUSER
-          value: root
-        - name: DBPWD 
-          value: db123
+      - name: DBHOST
+        valueFrom:
+          configMapKeyRef:
+            name: webapp-config
+            key: DBHOST
+       - name: DBPORT
+         valueFrom:
+           configMapKeyRef:
+             name: webapp-config
+             key: DBPORT
+       - name: DBUSER
+         value: root
+       - name: DBPWD 
+         value: db123
        - name: GROUP_NAME
          valueFrom:
            configMapKeyRef:
              name: webapp-config
              key: GROUP_NAME
-       - name: IMAGE_URL
+       - name: image
          valueFrom:
            configMapKeyRef:
              name: webapp-config
-             key: IMAGE_URL
+             key: image
+             
        ports: 
        - containerPort: 81
          protocol: TCP
