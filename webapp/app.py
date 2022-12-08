@@ -3,19 +3,19 @@ from pymysql import connections
 import os
 import random
 import argparse
+import boto3 
 
 
 app = Flask(__name__)
 
 DBHOST = os.environ.get("DBHOST") or "localhost"
 DBUSER = os.environ.get("DBUSER") or "root"
-DBPWD = os.environ.get("DBPWD") or "passwors"
+DBPWD = os.environ.get("DBPWD") or "password"
 DATABASE = os.environ.get("DATABASE") or "employees"
 DBPORT = int(os.environ.get("DBPORT"))
 GROUP_NAME = os.environ.get('GROUP_NAME')
-IMAGE_URL = os.environ.get('IMAGE_URL')
-IMAGE_S3 = os.environ.get('IMAGE_S3')
-image1 = os.environ.get('image1')
+BACKGROUND_URL = os.environ.get('BACKGROUND_URL')
+    
 
 # Create a connection to the MySQL database
 db_conn = connections.Connection(
@@ -47,14 +47,24 @@ table = 'employee';
 # # Generate a random color
 # COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lime"])
 
+def backgroud_file(file_name, bucket):
+    """
+    Function to download a given file from an S3 bucket
+    """
+    s3 = boto3.resource('s3')
+    output = f"background/{file_name}"
+    s3.Bucket(bucket).backgroud_file(file_name, output)
+
+    return output
+
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', GROUP_NAME=GROUP_NAME, image1=image1)
+    return render_template('addemp.html', GROUP_NAME=GROUP_NAME)
 
 @app.route("/about", methods=['GET','POST' ])
 def about():
-    return render_template('about.html', GROUP_NAME=GROUP_NAME, image1=image1)
+    return render_template('about.html', GROUP_NAME=GROUP_NAME)
 
     
 @app.route("/addemp", methods=['POST'])
@@ -83,7 +93,7 @@ def AddEmp():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    return render_template("getemp.html", GROUP_NAME=GROUP_NAME, image1=image1)
+    return render_template("getemp.html", GROUP_NAME=GROUP_NAME)
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
