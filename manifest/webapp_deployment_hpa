@@ -1,0 +1,58 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: e-webapp
+  labels: 
+    app: employees
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: employees
+  template:
+    metadata:
+      labels:
+        app: employees
+    spec:
+      serviceAccountName: clo835
+      containers:
+        - name: e-webapp
+          image: 678092784151.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp:v2.0
+          ports: 
+            - containerPort: 81
+              protocol: TCP
+          resources:
+            limits:
+              cpu: 500m
+            requests:
+              cpu: 200m
+          env:
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: DBHOST
+            - name: DBPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: DBPORT
+            - name: DBUSER
+              value: root
+            - name: DBPWD 
+              value: db123
+            - name: GROUP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: GROUP_NAME
+            - name: image
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: image
+            - name: IMAGE_S3
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: IMAGE_S3
