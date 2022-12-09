@@ -14,37 +14,42 @@ spec:
       labels:
         app: employees
     spec:
-      ServiceAccountName: clo835
+      serviceAccountName: clo835
       containers:
-      - name: e-webapp
-        image: 387584877503.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp
-        env:
-      - name: DBHOST
-        valueFrom:
-          configMapKeyRef:
-            name: webapp-config
-            key: DBHOST
-       - name: DBPORT
-         valueFrom:
-           configMapKeyRef:
-             name: webapp-config
-             key: DBPORT
-       - name: DBUSER
-         value: root
-       - name: DBPWD 
-         value: db123
-       - name: GROUP_NAME
-         valueFrom:
-           configMapKeyRef:
-             name: webapp-config
-             key: GROUP_NAME
-       - name: image
-         valueFrom:
-           configMapKeyRef:
-             name: webapp-config
-             key: image
-             
-       ports: 
-       - containerPort: 81
-         protocol: TCP
-          
+        - name: e-webapp
+          image: 360201675659.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp:v2.0
+          ports: 
+            - containerPort: 81
+              protocol: TCP
+          env:
+            - name: DBHOST
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: DBHOST
+            - name: DBPORT
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: DBPORT
+            - name: DBUSER
+              value: root
+            - name: DBPWD 
+              value: db123
+            - name: GROUP_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: GROUP_NAME
+            - name: image
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: image
+            - name: IMAGE_S3
+              valueFrom:
+                configMapKeyRef:
+                  name: webapp-config
+                  key: IMAGE_S3
+            
+            
