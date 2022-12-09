@@ -43,7 +43,7 @@ jobs:
         run: |
           cd webapp/
           docker build -f Dockerfile -t $ECR_REGISTRY/finalproject-webapp:v5.0 .
-          docker push $ECR_REGISTRY/finalproject-webapp:v4.0
+          docker push $ECR_REGISTRY/finalproject-webapp:v5.0
           
       - name: MYSQL build, test, tag, and push image to Amazon ECR
         env:
@@ -51,4 +51,4 @@ jobs:
         run: |
           cd webapp/
           docker build -f Dockerfile_mysql -t $ECR_REGISTRY/finalproject-mysql:v5.0 .
-          docker push $ECR_REGISTRY/finalproject-mysql:v4.0
+          docker push $ECR_REGISTRY/finalproject-mysql:v5.0
