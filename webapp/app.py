@@ -14,7 +14,7 @@ DBPWD = os.environ.get("DBPWD") or "password"
 DATABASE = os.environ.get("DATABASE") or "employees"
 DBPORT = int(os.environ.get("DBPORT"))
 GROUP_NAME = os.environ.get('GROUP_NAME')
-BACKGROUND_URL = os.environ.get('image') or "failed to load"
+BACKGROUND_URL = os.environ.get('image1') or "failed to load"
     
 
 # Create a connection to the MySQL database
@@ -47,26 +47,26 @@ table = 'employee';
 # # Generate a random color
 # COLOR = random.choice(["red", "green", "blue", "blue2", "darkblue", "pink", "lime"])
 
-def background_file(backgroundimg1, bucket):
-    """
-    Function to download a given file from an S3 bucket
-    """
-    s3 = boto3.resource('s3')
-    output = f"background/{backgroundimg1}"
-    s3.Bucket(bucket).background_file(backgroundimg1, output)
+# def background_file(BACKGROUND_URL(backgroundimg1), bucket):
+#     """
+#     Function to download a given file from an S3 bucket
+#     """
+#     s3 = boto3.resource('s3')
+#     output = f"background/{backgroundimg1}"
+#     s3.Bucket(bucket).background_file(BACKGROUND_URLbackgroundimg1, output)
 
-    return output
+#     return output
 
-BACKGROUND = "background/backgroundimg1"
+# BACKGROUND = "background/backgroundimg1"
 
 
 @app.route("/", methods=['GET', 'POST'])
 def home():
-    return render_template('addemp.html', GROUP_NAME=GROUP_NAME, background=BACKGROUND)
+    return render_template('addemp.html', GROUP_NAME=GROUP_NAME, background=BACKGROUND_URL)
 
 @app.route("/about", methods=['GET','POST' ])
 def about():
-    return render_template('about.html', GROUP_NAME=GROUP_NAME, background=BACKGROUND)
+    return render_template('about.html', GROUP_NAME=GROUP_NAME, background=BACKGROUND_URL)
 
     
 @app.route("/addemp", methods=['POST'])
@@ -95,7 +95,7 @@ def AddEmp():
 
 @app.route("/getemp", methods=['GET', 'POST'])
 def GetEmp():
-    return render_template("getemp.html", GROUP_NAME=GROUP_NAME, background=BACKGROUND)
+    return render_template("getemp.html", GROUP_NAME=GROUP_NAME, background=BACKGROUND_URL)
 
 
 @app.route("/fetchdata", methods=['GET','POST'])
@@ -124,7 +124,7 @@ def FetchData():
         cursor.close()
 
     return render_template("getempoutput.html", id=output["emp_id"], fname=output["first_name"],
-                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"],GROUP_NAME=GROUP_NAME, background=BACKGROUND)
+                           lname=output["last_name"], interest=output["primary_skills"], location=output["location"],GROUP_NAME=GROUP_NAME, background=BACKGROUND_URL)
 
 if __name__ == '__main__':
     

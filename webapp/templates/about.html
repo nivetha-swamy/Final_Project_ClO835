@@ -1,14 +1,16 @@
 <!doctype html>
 <title>Lets Enjoy {{ GROUP_NAME }}</title>
-<body style="{{ background }}"></body>
+<body style="background: url{{background}};"></body>
 <div style="color: #e4e4e4;
     text-align:  center;
     height: 90px;
     vertical-align:  middle;">
 {% if name %}
-  <h1>Hello from {{ name }}!</h1>
+  <h1>Hello from {{ GROUP_NAME }}!</h1>
+    
 {% else %}
-  <h1>Hello From CLO835!</h1>
+  <h1>Hello From {{ GROUP_NAME }}</h1>
+   
 {% endif %}
 
   {% if contents %}
