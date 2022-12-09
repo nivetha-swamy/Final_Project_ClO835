@@ -4,12 +4,12 @@ metadata:
   name: mysql-pvc
   labels:
     name: mysql-pvc
-  namespace: lab3
+  namespace: final
 spec:
-  storageClassName: standard
+  storageClassName: gp2
   resources:
     requests:
-      storage: 4Gi
+      storage: 2Gi
   accessModes:
     - ReadWriteOnce
       

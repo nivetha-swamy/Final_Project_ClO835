@@ -57,7 +57,7 @@ def background_file(backgroundimg1, bucket):
 
     return output
 
-BACKGROUND = "background_file/backgroundimg1"
+BACKGROUND = "background/backgroundimg1"
 
 
 @app.route("/", methods=['GET', 'POST'])
