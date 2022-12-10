@@ -16,6 +16,11 @@ spec:
     spec:
       serviceAccountName: clo835
       containers:
+        resources:
+          limits:
+            cpu: 200m
+          request:
+            cpu: 200m
         - name: e-webapp
           image: 360201675659.dkr.ecr.us-east-1.amazonaws.com/finalproject-webapp:v2.0
           ports: 
