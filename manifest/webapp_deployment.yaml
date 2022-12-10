@@ -33,9 +33,15 @@ spec:
                   name: webapp-config
                   key: DBPORT
             - name: DBUSER
-              value: root
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key: user
             - name: DBPWD 
-              value: db123
+              valueFrom:
+                secretKeyRef:
+                  name: mysql-secret
+                  key : db-password
             - name: GROUP_NAME
               valueFrom:
                 configMapKeyRef:
